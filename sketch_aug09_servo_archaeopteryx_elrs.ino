@@ -1,5 +1,8 @@
-#define CRSF_BAUDRATE 115200
 void serialEventRun(){}
+
+
+// for arduino pro mini set baud rate 115200 on ELRS RX and package rate to 333Mhz on radio transmitter 
+#define CRSF_BAUDRATE 115200 
 
 // #define DOPRINTS
 //Arduino servo flap system
@@ -11,19 +14,15 @@ void serialEventRun(){}
 #define port Serial
 
 #include <DigitalServo.h>
-#include <CrsfSerial.h>
+
+// use this ELRS library https://github.com/CapnBry/CRServoF
+#include <CrsfSerial.h> 
 
 // Pass any HardwareSerial port
 // "Arduino" users (atmega328) can not use CRSF_BAUDRATE, as the atmega does not support it
 // and should pass 250000, but then also must flash the receiver with RCVR_UART_BAUD=250000
 // Also note the atmega only has one Serial, so logging to Serial must be removed
 CrsfSerial crsf(port, CRSF_BAUDRATE);
-
-int packetPerSec;
-
-#define FRESH_TIME_US 4000  // Update every 4ms
-unsigned long int currentMicros = 0;
-
 
 int servo_left_pin = 7;
 int servo_right_pin = 9;
